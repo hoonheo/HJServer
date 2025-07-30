@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.h2</groupId>
+    <artifactId>hjserver</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>web_server</artifactId>
+  <packaging>jar</packaging>
+  <name>hjserver-web-server</name>
+
+  <dependencies>
+    <!-- 공통 설정 -->
+    <dependency>
+      <groupId>com.h2</groupId>
+      <artifactId>config</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
+    <!-- 공통 유틸 -->
+    <dependency>
+      <groupId>com.h2</groupId>
+      <artifactId>common</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
+    <!-- Spring Boot Web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+  <groupId>com.github.eirslett</groupId>
+  <artifactId>frontend-maven-plugin</artifactId>
+  <version>1.14.1</version>
+  <configuration>
+    <workingDirectory>${project.basedir}/../react/my-react-app</workingDirectory>
+  </configuration>
+  <executions>
+    <!-- Node/NPM 설치 -->
+    <execution>
+      <id>install-node-and-npm</id>
+      <goals><goal>install-node-and-npm</goal></goals>
+      <configuration>
+        <nodeVersion>v20.11.1</nodeVersion> <!-- 필요 시 Node 버전 조정 -->
+      </configuration>
+    </execution>
+
+    <!-- npm install -->
+    <execution>
+      <id>npm install</id>
+      <goals><goal>npm</goal></goals>
+      <configuration>
+        <arguments>install</arguments>
+      </configuration>
+    </execution>
+
+    <!-- React build -->
+    <execution>
+      <id>npm run build</id>
+      <goals><goal>npm</goal></goals>
+      <phase>generate-resources</phase>
+      <configuration>
+        <arguments>run build</arguments>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+
+<!-- React dist 폴더 복사 -->
+<plugin>
+  <artifactId>maven-resources-plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <id>copy-react-build</id>
+      <phase>process-resources</phase>
+      <goals><goal>copy-resources</goal></goals>
+      <configuration>
+        <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+        <resources>
+          <resource>
+            <directory>${project.basedir}/../react/my-react-app/dist</directory>
+            <filtering>false</filtering>
+          </resource>
+        </resources>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+
+    </plugins>
+  </build>
+</project>

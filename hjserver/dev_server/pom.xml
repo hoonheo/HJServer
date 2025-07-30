@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.h2</groupId>
+    <artifactId>hjserver</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>dev_server</artifactId>
+  <packaging>jar</packaging>
+  <name>hjserver-dev-server</name>
+
+  <dependencies>
+    <!-- 공통 설정 모듈 -->
+    <dependency>
+      <groupId>com.h2</groupId>
+      <artifactId>config</artifactId>
+    </dependency>
+
+    <!-- 공통 유틸, DTO, 예외 등 (필요 시 추가) -->
+    <dependency>
+      <groupId>com.h2</groupId>
+      <artifactId>common</artifactId>
+    </dependency>
+
+    <!-- Spring Boot Core -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
