@@ -45,7 +45,7 @@ function Login() {
 
   return (
     <div style={{ maxWidth: '400px', margin: '100px auto' }}>
-      <h2>로그인3</h2>
+      <h2>로그인</h2>
       <input
         type="text"
         placeholder="아이디"
@@ -61,7 +61,7 @@ function Login() {
         style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
       />
       <button onClick={handleLogin} style={{ width: '100%', padding: '10px' }}>
-        로그인
+        로그인 
       </button>
 
       {message && (
